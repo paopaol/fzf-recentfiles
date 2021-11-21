@@ -111,7 +111,7 @@ end
 local recentfiles = {}
 local cache = '/home/jz/.cache/nvim/recentfiles.txt'
 
-M = {}
+local M = {}
 
 M.push_latest_used_file = function(absolute_path, timestamp)
   local item = {path = absolute_path, time = timestamp}
@@ -131,7 +131,7 @@ M.update_history = function()
   end
 end
 
-M.get = function()
+M.get_histories = function()
   local files = {}
   for _, item in pairs(recentfiles) do table.insert(files, item) end
 
@@ -140,10 +140,10 @@ M.get = function()
 end
 
 M.fzf_recentfiles = function()
-  local tasks = M.get()
+  local files = M.get_histories()
 
   local items = {}
-  for _, task in pairs(tasks) do
+  for _, task in pairs(files) do
     setmetatable(task, {__tostring = function(table) return table.path end})
     table.insert(items, task)
     items[tostring(task)] = task
