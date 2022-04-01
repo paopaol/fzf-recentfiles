@@ -109,7 +109,8 @@ do
 end
 
 local recentfiles = {}
-local cache = '/home/jz/.cache/nvim/recentfiles.txt'
+local cache = string.format('%s/.cache/nvim/recentfiles.txt',
+                            vim.fn.getenv("HOME"))
 
 local M = {}
 
